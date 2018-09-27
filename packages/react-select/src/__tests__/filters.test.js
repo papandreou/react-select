@@ -23,3 +23,19 @@ test('matchFrom > start-word > to ignore a match within a word', () => {
   });
   expect(filter('foo bar', 'oo')).toBe(false);
 });
+
+test('ignoreOrder > to find two matches specified in the reverse order in the needle', () => {
+  const filter = createFilter({
+    ignoreOrder: true,
+    stringify: String,
+  });
+  expect(filter('foo bar', 'bar foo')).toBe(true);
+});
+
+test('ignoreOrder > to require all words in the needle to be present', () => {
+  const filter = createFilter({
+    ignoreOrder: true,
+    stringify: String,
+  });
+  expect(filter('foo bar', 'bar foo quux')).toBe(false);
+});
