@@ -62,14 +62,13 @@ export const createFilter = (config: ?Config) => (
   }
 
   if (ignoreOrder) {
+    const candidateWords = candidate.split(/\s+/);
     return input
       .split(/\s+/)
       .every(inputWord =>
-        candidate
-          .split(/\s+/)
-          .some(candidateWord =>
-            matchCandidate(inputWord, candidateWord, matchFrom)
-          )
+        candidateWords.some(candidateWord =>
+          matchCandidate(inputWord, candidateWord, matchFrom)
+        )
       );
   } else {
     return matchCandidate(input, candidate, matchFrom);
